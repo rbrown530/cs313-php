@@ -30,7 +30,25 @@
 
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h1>Coming Soon</h1>
+                <h1>Assignments</h1>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Week</th>
+                        <th>Link</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Survey</td>
+                        <td><a href="week3.php">Week 3</a> </td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
