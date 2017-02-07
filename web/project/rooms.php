@@ -27,10 +27,11 @@ error_reporting(E_ALL);
 
             <li><a href="main.php">Main</a></li>
             <li><a href="items.php">Items</a></li>
+            <li><a href="manage.php">Manage</a></li>
         </ul>
-        <form class="navbar-form navbar-left">
+        <form action="search.php" method="post" class="navbar-form navbar-left">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" name="search" class="form-control" placeholder="Search for item">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
@@ -39,8 +40,9 @@ error_reporting(E_ALL);
 <div class="container">
 
     <?php
+
 $id = $_GET['id'];
-$stmt = $db->prepare('SELECT * FROM rooms JOIN items on rooms.id = items.room_id join notes on items.id = notes.item_id WHERE rooms.id=:id GROUP BY rooms.id,items.id,notes.id');
+$stmt = $db->prepare('SELECT items.id as item_id, * FROM rooms JOIN items on rooms.id = items.room_id join notes on items.id = notes.item_id WHERE rooms.id=:id GROUP BY rooms.id,items.id,notes.id');
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -63,7 +65,7 @@ if($title != $row['item_name']) {
         }
         $jumbo = true;
     echo ' <div class="panel panel-default">
-  <div class="panel-heading">'.$row['item_name'].'</div>
+  <div class="panel-heading">'.$row['item_name'].' <a href="edititems.php?item_id=' . trim($row['item_id']).'"> Edit</a> <a href="addnote.php?item_id=' . trim($row['item_id']).'">Add Note</a></div>
   <div class="panel-body">Note '.$i.': '.$row['note_text'].'
 
   ';

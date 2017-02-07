@@ -22,22 +22,26 @@ include ('conn.php');
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="home.php">Inventory Manager</a>
+            <a class="navbar-brand" href="main.php">Inventory Manager</a>
         </div>
         <ul class="nav navbar-nav">
 
             <li><a href="main.php">Main</a></li>
             <li><a href="items.php">Items</a></li>
+            <li><a href="manage.php">Manage</a></li>
         </ul>
-        <form class="navbar-form navbar-left">
+        <form action="search.php" method="post" class="navbar-form navbar-left">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" name="search" class="form-control" placeholder="Search for item">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
 </nav>
 <div class="container">
+    <div class="jumbotron">
+        <h1>Welcome</h1>
+    </div>
 <h1>Rooms</h1>
     <?php
 

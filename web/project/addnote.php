@@ -1,3 +1,10 @@
+
+<?php
+include ('conn.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +22,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="main.php">Inventory Manager</a>
+            <a class="navbar-brand" href="home.php">Inventory Manager</a>
         </div>
         <ul class="nav navbar-nav">
 
@@ -23,46 +30,30 @@
             <li><a href="items.php">Items</a></li>
             <li><a href="manage.php">Manage</a></li>
         </ul>
-        <form action="search.php" method="post" class="navbar-form navbar-left">
+        <form class="navbar-form navbar-left">
             <div class="form-group">
-                <input type="text" name="search" class="form-control" placeholder="Search for item">
+                <input type="text" class="form-control" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
 </nav>
 <div class="container">
-    <div class="jumbotron">
-        <h1>Search Results</h1>
-    </div>
-<div class="container">
+
+
+<form action="noteadd.php" method="post">
+
+    <textarea name="note_text"><?php echo $_GET['item_id']?></textarea>
+<input type="hidden" name="id" value="<?php echo $_GET['item_id']?>" />
+    <input type="submit" name="submit"/>
 
 
 
+</form>
 
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-require('conn.php');
 
-$searchterm = $_POST['search'];
-
-$stmt = $db->prepare('SELECT * FROM items WHERE item_name LIKE :item');
-$stmt->bindValue(':item', '%' . $searchterm . '%');
-$stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-if(!empty($rows)) {
-
-    foreach ($rows as $row) {
-        echo '<h1><a href="edititems.php?item_id=' . trim($row['id']).'"> ' . $row['item_name'] . '</a></h1>';
-    }
-}else
-{
-echo'no results';
-}
-?>
 </div>
 </body>
 </html>
+
+

@@ -39,39 +39,48 @@ error_reporting(E_ALL);
 </nav>
 <div class="container">
     <div class="jumbotron">
-        <h1>Add Items</h1>
+        <h1>Manage</h1>
     </div>
 <div class="container">
-<form action="itemsinsert.php" id="items" method="POST">
-    <label for="item">Item</label>
-    <input type="text" name="item" /><br>
-    <label for="qty">Quantity</label>
-    <input type="text" name="qty" /><br>
-    <br>
-    <label for="name">Category</label><br>
+    <div class="col-lg-6">
+    <form action="categoryinsert.php" id="category" method="POST">
+        <label for="category">Category</label>
+        <input type="text" name="category" placeholder="Add Category"/><br>
+        <input class="btn btn-primary" type="submit" name="submit"/><br>
+    </form>
+        <label for="name">Current Categories</label><br>
 
-    <?php
-    require 'conn.php';
-    foreach ($db->query('SELECT * FROM categories') as $row)
-    {
-        echo '<input type="radio" name="category" value="'.$row['id'].'" > '.$row['category'].'<br/>';
+        <?php
+        require 'conn.php';
+        foreach ($db->query('SELECT * FROM categories') as $row)
+        {
+            echo ''.$row['category'].'<a href="edit.php?cat_id=' . trim($row['id']).'"> edit</a><br/>';
 
-    }
-    ?>
-    <label for="name">Rooms</label><br>
+        }
+        ?>
 
 
-    <?php
+    </div>
+    <div class="col-lg-6">
 
-    foreach ($db->query('SELECT * FROM rooms') as $row)
-    {
-        echo '<input type="radio" name="room" value="'.$row['id'].'" > '.$row['room_name'].'<br/>';
+    <form action="roominsert.php" id="rooms" method="POST">
+        <label for="room">Room</label>
+        <input type="text" name="room" placeholder="Add Room"/><br>
+        <input class="btn btn-primary" type="submit" name="submit"/><br>
+    </form>
+    <label for="name">Current Rooms</label><br>
 
-    }
-    ?>
-<textarea name="notes" placeholder="optional"></textarea><br>
-    <input class="btn btn-primary" type="submit" name="submit"/>
-</form>
+
+        <?php
+
+        foreach ($db->query('SELECT * FROM rooms') as $row)
+        {
+            echo ''.$row['room_name'].'<a href="edit.php?room_id=' . trim($row['id']).'"> edit</a><br/>';
+
+        }
+        ?>
+
+    </div>
 </div>
 
 
